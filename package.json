@@ -1,0 +1,84 @@
+{
+  "name": "graphql-server",
+  "version": "0.0.1",
+  "description": "GraphQL server template in typescript.",
+  "scripts": {
+    "lint": "eslint --ext .ts,.tsx src/** test/** && tsc --noEmit --skipLibCheck",
+    "copy-gql-types": "cp -r ./graphql/ ./build/graphql",
+    "build-clean": "rimraf ./build && tsc --skipLibCheck --project tsconfig.build.json",
+    "resolve-paths": "tscpaths -p tsconfig.build.json -s ./src -o ./build/src",
+    "build": "npm run build-clean && npm run resolve-paths && npm run copy-gql-types",
+    "test": "ava",
+    "start": "env $(cat .env) ts-node --files --transpile-only -r tsconfig-paths/register src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccpacillos/graphql-server.git"
+  },
+  "keywords": [
+    "graphql",
+    "api",
+    "typescript"
+  ],
+  "author": "ccpacillos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccpacillos/graphql-server/issues"
+  },
+  "homepage": "https://github.com/ccpacillos/graphql-server#readme",
+  "devDependencies": {
+    "@types/koa2-cors": "^2.0.1",
+    "@types/ramda": "^0.26.25",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "ava": "^2.4.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.0.7",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "rimraf": "^3.0.0",
+    "supertest-koa-agent": "^0.3.2",
+    "ts-node": "^8.4.1",
+    "tsconfig-paths": "^3.9.0",
+    "tscpaths": "0.0.9",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "@koa/router": "^8.0.1",
+    "apollo-server-koa": "^2.9.4",
+    "graphql": "^14.5.8",
+    "graphql-tag-pluck": "^0.8.5",
+    "highoutput-utilities": "0.0.10",
+    "koa": "^2.8.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
+    "koa2-cors": "^2.0.6",
+    "merge-graphql-schemas": "^1.7.0",
+    "ramda": "^0.26.1",
+    "uuid": "^3.3.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run lint"
+    }
+  },
+  "ava": {
+    "concurrency": 10,
+    "failFast": true,
+    "powerAssert": true,
+    "verbose": true,
+    "files": [
+      "test/**/*.test.ts"
+    ],
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register/transpile-only",
+      "tsconfig-paths/register"
+    ]
+  }
+}

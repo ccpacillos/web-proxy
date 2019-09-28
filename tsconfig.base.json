@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "lib": ["es2018", "esnext.asynciterable"],
+    "target": "es2018",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+    "baseUrl": ".",
+    "outDir": "./build",
+    "paths": {
+      "@graphql/*": ["typings/graphql/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

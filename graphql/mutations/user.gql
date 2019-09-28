@@ -1,0 +1,7 @@
+input AddUserInput {
+  email: String!
+}
+
+type Mutation {
+  addUser(input: AddUserInput!): User!
+}
