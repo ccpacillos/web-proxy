@@ -12,13 +12,20 @@ export class CustomRepository<T> extends Repository<T> {
   }
 
   async findOrCreate(
-    where: [FindConditions<T>] | FindConditions<T> | ObjectLiteral | string,
-    defaults: DeepPartial<T>,
+    where:
+      | [FindConditions<T>]
+      | FindConditions<T>
+      | ObjectLiteral
+      | string
+      | DeepPartial<T>,
+    defaults?: DeepPartial<T>,
   ): Promise<[T, boolean]> {
     const existing: T | undefined = await this.findOne({ where });
     if (existing) return [existing, false];
 
-    const entity = await this.save(defaults);
+    const entity = await this.save(
+      defaults || this.create(where as DeepPartial<T>),
+    );
     return [entity, true];
   }
 

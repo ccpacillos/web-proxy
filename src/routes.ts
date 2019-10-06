@@ -20,14 +20,7 @@ router.post('/users', async (ctx) => {
   }
 
   const { email } = ctx.request.body;
-  const [, created] = await Users().findOrCreate(
-    {
-      email,
-    },
-    {
-      email,
-    },
-  );
+  const [, created] = await Users().findOrCreate({ email });
 
   if (!created) {
     throw new APIError({
