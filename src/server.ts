@@ -3,26 +3,75 @@ import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import cors from 'koa2-cors';
 import { Logger, delay } from 'highoutput-utilities';
+import 'reflect-metadata';
+import { Connection, createConnection } from 'typeorm';
+import { IRouterContext } from 'koa-router';
+import { APIError } from './error';
 
 const logger = new Logger(['server']);
+interface MYSQLConfig {
+  username: string;
+  password: string;
+  database: string;
+  host: string;
+  port: number;
+  logging: boolean;
+}
 
 export class App {
-  readonly host: string;
-  readonly port: number;
-  readonly routes: any;
+  readonly host!: string;
+  readonly port!: number;
+  readonly routes!: any;
+  readonly mysql!: MYSQLConfig;
+  private connection!: Connection;
   private app!: Koa;
   private server!: Server;
 
-  constructor(args: { host: string; port: number; routes: any }) {
+  constructor(args: {
+    host: string;
+    port: number;
+    routes: any;
+    mysql: MYSQLConfig;
+  }) {
     this.host = args.host;
     this.port = args.port;
     this.routes = args.routes;
+    this.mysql = args.mysql;
   }
 
-  public start() {
+  public async start() {
+    this.connection = await createConnection({
+      name: 'default',
+      type: 'mysql',
+      ...this.mysql,
+      entities: [`${__dirname}/orm/models/*{.ts,.js}`],
+      synchronize: false,
+    });
     this.app = new Koa();
     this.app.use(cors());
     this.app.use(bodyParser());
+    this.app.use(async (ctx: IRouterContext, next) => {
+      try {
+        await next();
+      } catch (error) {
+        if (error instanceof APIError) {
+          ctx.body = {
+            ok: false,
+            error: {
+              code: error.code,
+              message: error.message,
+            },
+          };
+
+          ctx.status = error.status;
+
+          return;
+        }
+
+        logger.error(error);
+        ctx.status = 500;
+      }
+    });
     this.app.use(this.routes);
 
     try {
@@ -56,6 +105,7 @@ export class App {
 
     try {
       await Promise.race([close, this.timeout()]);
+      await this.connection.close();
       logger.info('Server stopped.');
       process.exit();
     } catch (err) {

@@ -1,0 +1,15 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "password",
+  "database": "Mock",
+  "synchronize": false,
+  "logging": true,
+  "migrations": ["migrations/**/*.ts"],
+  "cli": {
+    "migrationsDir": "migrations/",
+    "subscribersDir": "src/subscriber"
+  }
+}
