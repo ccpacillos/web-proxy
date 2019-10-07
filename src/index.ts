@@ -1,4 +1,4 @@
-import { App } from './server';
+import { App } from './app';
 import { routes } from './routes';
 
 const {
