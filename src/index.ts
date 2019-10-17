@@ -6,7 +6,7 @@ const app = express();
 app.use(
   '/identifi',
   proxy({
-    target: 'http://localhost:8000',
+    target: 'http://localhost:3000',
     pathRewrite: (path) => path.replace(/\/identifi/, ''),
   }),
 );
@@ -14,7 +14,7 @@ app.use(
 app.use(
   '/mock',
   proxy({
-    target: 'http://localhost:8001',
+    target: 'http://localhost:3001',
     pathRewrite: (path) => path.replace(/\/mock/, ''),
   }),
 );
