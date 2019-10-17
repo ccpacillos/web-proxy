@@ -1,1 +1,22 @@
-console.log('hello!');
+import express from 'express';
+import proxy from 'http-proxy-middleware';
+
+const app = express();
+
+app.use(
+  '/identifi',
+  proxy({
+    target: 'http://localhost:8000',
+    pathRewrite: (path) => path.replace(/\/identifi/, ''),
+  }),
+);
+
+app.use(
+  '/mock',
+  proxy({
+    target: 'http://localhost:8001',
+    pathRewrite: (path) => path.replace(/\/mock/, ''),
+  }),
+);
+
+app.listen(3000);
