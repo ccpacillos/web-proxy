@@ -1,3 +1,3 @@
-# http-server
+# typescript-template
 
-HTTP Server Template in Typescript
+A Project Template in Typescript
