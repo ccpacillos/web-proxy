@@ -4,18 +4,11 @@
   "description": "GraphQL server template in typescript.",
   "scripts": {
     "lint": "eslint --ext .ts,.tsx src/** && tsc --noEmit --skipLibCheck",
-    "copy-gql-types": "cp -r ./graphql/ ./build/graphql",
     "build-clean": "rimraf ./build && tsc --skipLibCheck --project tsconfig.build.json",
     "resolve-paths": "tscpaths -p tsconfig.build.json -s ./src -o ./build/src",
-    "build": "npm run build-clean && npm run resolve-paths && npm run copy-gql-types",
+    "build": "npm run build-clean && npm run resolve-paths",
     "test": "ava",
-    "start": "env $(cat .env) ts-node --files --transpile-only -r tsconfig-paths/register src/index",
-    "docker": "docker-compose -f docker-compose.local.yml up -d",
-    "drop-db": "mysql -h 0.0.0.0 -u root --password=password -e 'DROP SCHEMA IF EXISTS Mock'",
-    "create-db": "mysql -h 0.0.0.0 -u root --password=password -e 'CREATE SCHEMA IF NOT EXISTS Mock'",
-    "reset-db": "npm run drop-db && npm run create-db",
-    "migrations": "ts-node --files --transpile-only -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run",
-    "schema": "npm run reset-db && npm run migrations"
+    "start": "env $(cat .env) ts-node --files --transpile-only -r tsconfig-paths/register src/index"
   },
   "repository": {
     "type": "git",
