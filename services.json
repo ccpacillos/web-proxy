@@ -1,0 +1,12 @@
+{
+  "services": [
+    {
+      "route": "/identifi",
+      "target": "http://localhost:3000"
+    },
+    {
+      "route": "/mock",
+      "target": "http://localhost:3001"
+    }
+  ]
+}

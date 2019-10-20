@@ -18,7 +18,7 @@
     "baseUrl": ".",
     "outDir": "./build",
     "paths": {
-      "@graphql/*": ["typings/graphql/*"]
+      "@src/*": ["src/*"]
     }
   },
   "exclude": ["node_modules"]
