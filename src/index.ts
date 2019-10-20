@@ -21,24 +21,48 @@ async function start() {
   }, config.services);
 
   await Promise.map(
-    config.services,
-    async (service: any) => {
+    config.services as { route: string; target: string }[],
+    async ({ route, target }) => {
+      const regex = new RegExp(route);
       app.use(
-        service.route as string,
+        route,
         proxy({
-          target: service.target as string,
-          pathRewrite: (path) => path.replace(/${route}`/, ''),
+          target,
+          pathRewrite: (path) => path.replace(regex, ''),
         }),
       );
     },
     {
       concurrency: 5,
     },
-  );
-
-  const port = process.env.PORT || 3000;
-  app.listen(port);
-  console.log(`App listening at port: ${port}`);
+  ).then(() => {
+    const port = process.env.PORT || 3000;
+    app.listen(port);
+    console.log(`App listening at port: ${port}`);
+  });
 }
 
 start();
+
+// import express from 'express';
+// import proxy from 'http-proxy-middleware';
+
+// const app = express();
+
+// app.use(
+//   '/identifi',
+//   proxy({
+//     target: 'http://localhost:8000',
+//     pathRewrite: (path) => path.replace(/\/identifi/, ''),
+//   }),
+// );
+
+// app.use(
+//   '/mock',
+//   proxy({
+//     target: 'http://localhost:3001',
+//     pathRewrite: (path) => path.replace(/\/mock/, ''),
+//   }),
+// );
+
+// app.listen(3000);
