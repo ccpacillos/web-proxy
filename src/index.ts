@@ -21,14 +21,28 @@ async function start() {
   }, config.services);
 
   await Promise.map(
-    config.services as { route: string; target: string }[],
-    async ({ route, target }) => {
-      const regex = new RegExp(route);
+    config.services as {
+      route: string;
+      target: string;
+      changeOrigin?: boolean;
+      pathRewrite?: {
+        pattern: string;
+        replaceWith: string;
+      };
+    }[],
+    async ({ route, target, changeOrigin, pathRewrite }) => {
       app.use(
         route,
         proxy({
           target,
-          pathRewrite: (path) => path.replace(regex, ''),
+          pathRewrite: (path) =>
+            pathRewrite
+              ? path.replace(
+                  new RegExp(pathRewrite.pattern),
+                  pathRewrite.replaceWith,
+                )
+              : path,
+          changeOrigin: !!changeOrigin,
         }),
       );
     },
