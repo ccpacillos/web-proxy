@@ -1,0 +1,12 @@
+{
+  "services": [
+    {
+      "route": "/identifi",
+      "target": "https://da83e0bf.ngrok.io",
+      "pathRewrite": {
+        "pattern": "/identifi",
+	"replaceWith": ""
+      }
+    }
+  ]
+}
