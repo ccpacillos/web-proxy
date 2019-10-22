@@ -1,6 +1,5 @@
 # Third party config files
 *.graphqlconfig
-services.json
 
 # Logs
 logs

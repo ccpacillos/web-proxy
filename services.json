@@ -1,0 +1,10 @@
+{
+  "services": [
+    {
+      "route": "/identifi",
+      "target": "https://29da0e51.ngrok.io",
+      "changeOrigin": true,
+      "pathRewrite": false
+    }
+  ]
+}

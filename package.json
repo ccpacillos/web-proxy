@@ -8,7 +8,8 @@
     "resolve-paths": "tscpaths -p tsconfig.build.json -s ./src -o ./build/src",
     "build": "npm run build-clean && npm run resolve-paths",
     "test": "ava",
-    "start": "env $(cat .env) ts-node --files --transpile-only -r tsconfig-paths/register src/index"
+    "local": "env $(cat .env) ts-node --files --transpile-only -r tsconfig-paths/register src/index",
+    "start": "node build/index.ts"
   },
   "repository": {
     "type": "git",
