@@ -9,7 +9,7 @@
     "build": "npm run build-clean && npm run resolve-paths",
     "test": "ava",
     "local": "env $(cat .env) ts-node --files --transpile-only -r tsconfig-paths/register src/index",
-    "start": "node build/index.ts"
+    "start": "node build/index.js"
   },
   "repository": {
     "type": "git",
