@@ -8,6 +8,15 @@
         "pattern": "/identifi",
         "replaceWith": ""
       }
+    },
+    {
+      "route": "/mock",
+      "target": "http://14e2169c.ngrok.io/",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "pattern": "/mock",
+	"replaceWith": ""
+      }
     }
   ]
 }
