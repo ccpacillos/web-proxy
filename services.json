@@ -11,7 +11,7 @@
     },
     {
       "route": "/mock",
-      "target": "http://14e2169c.ngrok.io/",
+      "target": "https://437395d1.ngrok.io",
       "changeOrigin": true,
       "pathRewrite": {
         "pattern": "/mock",
