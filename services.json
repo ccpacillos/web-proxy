@@ -10,11 +10,11 @@
       }
     },
     {
-      "route": "/mock",
+      "route": "/identify",
       "target": "https://f1e12000.ngrok.io",
       "changeOrigin": true,
       "pathRewrite": {
-        "pattern": "/mock",
+        "pattern": "/identify",
 	"replaceWith": ""
       }
     }
