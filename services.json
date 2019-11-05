@@ -17,6 +17,15 @@
         "pattern": "/identify",
 	"replaceWith": ""
       }
+    },
+    {
+      "route": "/identifidev",
+      "target": "http://development-api.identifi.com",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "pattern": "/identifidev",
+	"replaceWith": ""
+      }
     }
   ]
 }
