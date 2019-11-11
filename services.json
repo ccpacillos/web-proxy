@@ -2,7 +2,7 @@
   "services": [
     {
       "route": "/identifi",
-      "target": "https://58cf6da6.ngrok.io",
+      "target": "https://291050fb.ngrok.io",
       "changeOrigin": true,
       "pathRewrite": {
         "pattern": "/identifi",
