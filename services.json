@@ -26,6 +26,15 @@
         "pattern": "/identifidev",
         "replaceWith": ""
       }
+    },
+    {
+      "route": "/identifistaging",
+      "target": "https://7b3f630a.ngrok.io",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "pattern": "/identifistaging",
+        "replaceWith": ""
+      }
     }
   ]
 }
